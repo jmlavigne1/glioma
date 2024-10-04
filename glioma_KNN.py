@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 """
 Spyder Editor
 
-This is a temporary script file.
+author: Joe LaVigne
 """
 import pandas as pd
 import numpy as np
@@ -18,7 +17,22 @@ X = glioma_grading_clinical_and_mutation_features.data.features
 y = glioma_grading_clinical_and_mutation_features.data.targets 
   
 # metadata 
-print(glioma_grading_clinical_and_mutation_features.metadata) 
+#print(glioma_grading_clinical_and_mutation_features.metadata) 
   
 # variable information 
-print(glioma_grading_clinical_and_mutation_features.variables) 
+#print(glioma_grading_clinical_and_mutation_features.variables) 
+
+
+
+#print(glioma_grading_clinical_and_mutation_features.data[0])
+
+#print(y)
+
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+
+
+classifier = KNeighborsClassifier(n_neighbors = 3)
+
+
+training_data, validation_data, training_labels, validation_labels = train_test_split(glioma_grading_clinical_and_mutation_features.data, glioma_grading_clinical_and_mutation_features.target, test_size= 0.2, random_state=100)
