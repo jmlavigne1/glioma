@@ -34,5 +34,5 @@ from sklearn.neighbors import KNeighborsClassifier
 
 classifier = KNeighborsClassifier(n_neighbors = 3)
 
-
-training_data, validation_data, training_labels, validation_labels = train_test_split(glioma_grading_clinical_and_mutation_features.data, glioma_grading_clinical_and_mutation_features.target, test_size= 0.2, random_state=100)
+#data to be cleaned up
+training_data, validation_data, training_labels, validation_labels = train_test_split(glioma_grading_clinical_and_mutation_features.data, y, test_size= 0.2, random_state=100)
