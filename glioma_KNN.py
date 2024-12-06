@@ -6,6 +6,7 @@ author: Joe LaVigne
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 from ucimlrepo import fetch_ucirepo 
   
@@ -24,15 +25,32 @@ y = glioma_grading_clinical_and_mutation_features.data.targets
 
 
 
-#print(glioma_grading_clinical_and_mutation_features.data[0])
+print(X)
 
-#print(y)
+print(y)
+
+df = X.join(y)
+df
+
+
+#EDA
+df_black = df[df['Race'] == 'black or african american']
+df_black.shape
+
+mean_age_black = df_black.Age_at_diagnosis.mean()
+print('The mean age at diagnosis for black or african american patients is', mean_age_black)
+
+df_black.isna().sum()
+
+
+
+
 
 from sklearn.model_selection import train_test_split
-from sklearn.neighbors import KNeighborsClassifier
+from sklearn.linear_model import LogisticRegression
 
 
-classifier = KNeighborsClassifier(n_neighbors = 3)
+
 
 #data to be cleaned up
-training_data, validation_data, training_labels, validation_labels = train_test_split(X, y, test_size= 0.2, random_state=100)
+#training_data, validation_data, training_labels, validation_labels = train_test_split(X, y, test_size= 0.2, random_state=100)
