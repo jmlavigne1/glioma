@@ -40,7 +40,31 @@ df_black.shape
 mean_age_black = df_black.Age_at_diagnosis.mean()
 print('The mean age at diagnosis for black or african american patients is', mean_age_black)
 
+df_black['Age_at_diagnosis'].max()
+df_black['Age_at_diagnosis'].min()
+
 df_black.isna().sum()
+
+plt.subplots(figsize=(15,10))
+df_black['Age_at_diagnosis'].plot(kind='hist')
+plt.show()
+plt.clf()
+
+
+df_black['Grade'].value_counts().plot(kind='bar')
+plt.xlabel('Grade', weight='bold')
+plt.ylabel('Count')
+plt.show()
+plt.clf()
+
+
+pd.crosstab(df_black.ATRX, df_black.Grade).plot(kind='bar')
+plt.show()
+plt.clf()
+
+pd.crosstab(df_black.Gender, df_black.Grade).plot(kind='bar')
+plt.show()
+
 
 
 
