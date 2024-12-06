@@ -23,8 +23,6 @@ y = glioma_grading_clinical_and_mutation_features.data.targets
 # variable information 
 #print(glioma_grading_clinical_and_mutation_features.variables) 
 
-
-
 print(X)
 
 print(y)
@@ -65,7 +63,20 @@ plt.clf()
 pd.crosstab(df_black.Gender, df_black.Grade).plot(kind='bar')
 plt.show()
 
+df_black = df_black.drop(columns=[['Race', 'NOTCH1', 'CSMD3', 'SMARCA4']])
+df_black.shape
 
+
+df_black = df_black.dropna()
+df_black.shape
+
+
+df_black_corr = df_black.corr()
+df_black_corr
+
+plt.subplots(figsize=(20,10))
+sns.heatmap(df_black_corr, annot=True, cmap='RdBu')
+plt.show()
 
 
 
