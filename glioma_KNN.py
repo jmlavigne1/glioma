@@ -111,9 +111,30 @@ print(f'Test data accuracy: {score_on_test_data*100}')
 #this shows us that the accuracy of the sub dataset is not very accurate.
 #hyperparameter tuning
 
+from sklearn.model_selection import RandomizedSearchCV
+
 distributions = {'penalty': ['l1', 'l2', 'elasticnet'], 'max_iter': range(10, 50), 'warm_start': [True,False], 'solver':['lbfgs', 'liblinear', 'newton-cg', 'newton-cholesky', 'sag'], 'C': np.logspace(-1,1,22)}
 
-clf = RandomizedSearchCV(estimator=LogisticRegression(),param_distribution = distributions, n_iter=100, scoring='accuracy', n_jobs=-1, verbose=1, random_state=42,)
+clf = RandomizedSearchCV(estimator=LogisticRegression(), param_distributions = distributions, n_iter=100, scoring='accuracy', n_jobs=-1, verbose=1, random_state=42,)
+clf.fit(x_train, y_train)
+best_params = clf.best_params_
+clf_best_dt = LogisticRegression(**best_params)
+clf_best_dt.fit(x_train, y_train)
+accuracy_score_2 = clf_best_dt.score(x_test, y_test)
+print(accuracy_score_2*100)
+
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+
+y_pred = clf_best_dt.predict(x_test)
+
+disp = ConfusionMatrixDisplay.from_predictions(y_test, y_pred, cmap=plt.cm.afmhot, display_labels = clf_best_dt.classes_)
+
+fig = disp.ax_.get_figure()
+fig.set_figwidth(15)
+fig.set_figheight(10)
+plt.title('Confusion Matrix', fontsize=20)
+plt.show()
+
 
 
 
