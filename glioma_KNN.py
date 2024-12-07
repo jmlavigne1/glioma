@@ -33,42 +33,45 @@ df
 
 #EDA
 df_black = df[df['Race'] == 'black or african american']
-df_black.shape
+df_black
 
-mean_age_black = df_black.Age_at_diagnosis.mean()
-print('The mean age at diagnosis for black or african american patients is', mean_age_black)
+df_black = df_black.drop(['Race','NOTCH1', 'CSMD3', 'SMARCA4'], axis=1, inplace=False)
+df_black
+print(df_black.shape)
 
-df_black['Age_at_diagnosis'].max()
-df_black['Age_at_diagnosis'].min()
+#mean_age_black = df_black.Age_at_diagnosis.mean()
+#print('The mean age at diagnosis for black or african american patients is', mean_age_black)
 
-df_black.isna().sum()
+#df_black['Age_at_diagnosis'].max()
+#df_black['Age_at_diagnosis'].min()
 
-plt.subplots(figsize=(15,10))
-df_black['Age_at_diagnosis'].plot(kind='hist')
-plt.show()
-plt.clf()
+#df_black.isna().sum()
 
-
-df_black['Grade'].value_counts().plot(kind='bar')
-plt.xlabel('Grade', weight='bold')
-plt.ylabel('Count')
-plt.show()
-plt.clf()
+#plt.subplots(figsize=(15,10))
+#df_black['Age_at_diagnosis'].plot(kind='hist')
+#plt.show()
+#plt.clf()
 
 
-pd.crosstab(df_black.ATRX, df_black.Grade).plot(kind='bar')
-plt.show()
-plt.clf()
-
-pd.crosstab(df_black.Gender, df_black.Grade).plot(kind='bar')
-plt.show()
-
-df_black = df_black.drop(columns=[['Race', 'NOTCH1', 'CSMD3', 'SMARCA4']])
-df_black.shape
+#df_black['Grade'].value_counts().plot(kind='bar')
+#plt.xlabel('Grade', weight='bold')
+#plt.ylabel('Count')
+#plt.show()
+#plt.clf()
 
 
-df_black = df_black.dropna()
-df_black.shape
+#pd.crosstab(df_black.ATRX, df_black.Grade).plot(kind='bar')
+#plt.show()
+#plt.clf()
+
+#pd.crosstab(df_black.Gender, df_black.Grade).plot(kind='bar')
+#plt.show()
+
+
+
+
+#df_black = df_black.dropna()
+#df_black
 
 
 df_black_corr = df_black.corr()
