@@ -86,9 +86,36 @@ plt.show()
 
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
+from sklearn.preprocessing import StandardScaler
+
+x = df_black.drop(columns=['Grade'])
+y = df_black['Grade']
+
+x.shape, y.shape
+
+x_train, x_test, y_train,y_test = train_test_split(x,y,test_size=0.20,random_state=42)
+
+scaler = StandardScaler()
+
+
+x_train = scaler.fit_transform(x_train)
+x_test = scaler.transform(x_test)
+
+
+clf = LogisticRegression()
+clf.fit(x_train, y_train)
+
+score_on_test_data = clf.score(x_test, y_test)
+print(f'Test data accuracy: {score_on_test_data*100}')
+
+#this shows us that the accuracy of the sub dataset is not very accurate.
+#hyperparameter tuning
+
+distributions = {'penalty': ['l1', 'l2', 'elasticnet'], 'max_iter': range(10, 50), 'warm_start': [True,False], 'solver':['lbfgs', 'liblinear', 'newton-cg', 'newton-cholesky', 'sag'], 'C': np.logspace(-1,1,22)}
+
+clf = RandomizedSearchCV(estimator=LogisticRegression(),param_distribution = distributions, n_iter=100, scoring='accuracy', n_jobs=-1, verbose=1, random_state=42,)
 
 
 
 
-#data to be cleaned up
-#training_data, validation_data, training_labels, validation_labels = train_test_split(X, y, test_size= 0.2, random_state=100)
+
