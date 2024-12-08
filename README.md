@@ -7,4 +7,4 @@ Created on Thu Oct  3 20:57:47 2024
 
 #README
 
-# This project is to demonstrate KKN machine learning technique
+# This project is to demonstrate logistic regression & sigmoid function graphing.
