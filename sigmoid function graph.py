@@ -13,6 +13,7 @@ X = glioma_grading_clinical_and_mutation_features.data.features
 y = glioma_grading_clinical_and_mutation_features.data.targets 
 
 
+
 # remove Nan values from dataset, and sift through whether using age, gender or other marked values for our sigmoid function. 
 X_race= pd.get_dummies(X['Race'])
 X_race = X_race.astype(int)
@@ -27,6 +28,8 @@ print(X)
 #target(y) should be the y axis and dictate the 0 or 1 classification. For feature 'Race' I can use get_dummies to make change categorical into numerical output. 
 
 
+X = X['Age_at_diagnosis']
+y = y['Grade']
 
 
 #################
@@ -36,7 +39,7 @@ model.fit(X.values,y.values)
 
 # Plug sample data into fitted model
 sample_x = np.linspace(-16.65, 33.35, 300).reshape(-1,1)
-probability = model.predict_proba(sample_x[:,1])
+probability = model.predict_proba(sample_x[:,0])
 
 # Plot logistic curve
 plt.plot(sample_x, probability, color='red', linewidth=3)
